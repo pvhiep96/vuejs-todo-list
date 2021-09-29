@@ -13,6 +13,18 @@ const storeData = {
     auth: {
       isAuthenticated: false
     }
+  },
+  getters: {
+    doneTodos: state => state.todos.filter(todo => todo.completed),
+    // progress() {
+    //   return Math.round(this.$store.state.todos.filter(todo => todo.completed).length /
+    //     this.$store.state.todos.length * 100
+    //   )
+    // }
+    progress: (state, getters) => {
+      const doneTodos = getters.doneTodos
+      return Math.round(doneTodos.length / state.todos.length * 100)
+    }
   }
 }
 
