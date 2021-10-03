@@ -4,7 +4,7 @@
     <ul>
       <li>Home</li>
       <li>About</li>
-      <li v-if='auth.isAuthenticated'>
+      <li v-if='isAuthenticated'>
         Total Todo: {{todos.length}}
         <!-- <button @click="loginOrLogout">Logout</button> -->
         <button @click="TOGGLE_AUTH">Logout</button>
@@ -19,7 +19,7 @@
 
 <script>
 
-import {mapMutations, mapState} from 'vuex'
+import {mapMutations, mapGetters} from 'vuex'
 export default {
   name: 'Navbar',
   // ############### Khong dung mapState #######################
@@ -29,7 +29,7 @@ export default {
   //   }
   // }
   // ############### Khong dung mapState #######################
-  computed: mapState(['todos', 'auth']),
+  computed: {...mapGetters(['isAuthenticated', 'todos'])},
   // methods: {
   //   loginOrLogout() {
   //     this.$store.commit('TOGGLE_AUTH')

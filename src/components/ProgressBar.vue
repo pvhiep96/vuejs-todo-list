@@ -1,9 +1,9 @@
 <template>
-  <p class="progress-bar" v-if="auth.isAuthenticated">Progress: {{progress}}%</p>
+  <p class="progress-bar" v-if="isAuthenticated">Progress: {{progress}}%</p>
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   name: 'ProgressBar',
   // computed: {
@@ -13,7 +13,7 @@ export default {
   //     )
   //   }
   // }
-  computed: {...mapGetters(['progress']), ...mapState(['auth'])}
+  computed: {...mapGetters(['progress', 'isAuthenticated'])}
 }
 </script>
 
