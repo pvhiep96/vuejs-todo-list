@@ -8,7 +8,7 @@ export default {
   name: 'ProgressBar',
   // computed: {
   //   progress() {
-  //     return Math.round(this.$store.state.todos.filter(todo => todo.completed).length /
+  //     return Math.round(this.$store.state.todos.filter(todo => todo.is_completed).length /
   //       this.$store.state.todos.length * 100
   //     )
   //   }

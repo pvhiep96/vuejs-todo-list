@@ -1,10 +1,10 @@
 <template>
   <div class="todo-list">
-    <TodoForm />
     <ul v-if="isAuthenticated">
-      <li v-for="todo in todos" :key="todo.id" :class="todo.completed ? 'completed' : ''">
-        {{ todo.title }}
-        <input type="checkbox" :checked="todo.completed" @change="MARK_COMPLETE(todo.id)" />
+      <TodoForm />
+      <li v-for="todo in todos" :key="todo.id" :class="todo.is_completed ? 'is_completed' : ''">
+        {{ todo.content }}
+        <input type="checkbox" :checked="todo.is_completed" @change="markComplete(todo.id)" />
         <button @click="deleteTodo(todo.id)">Delete</button>
       </li>
     </ul>
@@ -14,7 +14,7 @@
 
 <script>
 
-import {mapActions, mapGetters, mapMutations} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 import TodoForm from './TodoForm.vue'
 export default {
   name: 'Todos',
@@ -41,13 +41,13 @@ export default {
   },
   // ############### Dung mapState #######################
   // methods: {
-  //   markTodoCompleted(todo) {
+  //   markTodois_completed(todo) {
   //     this.$store.commit('MARK_COMPLETE', todo.id)
   //   }
   // }
   methods: {
-    ...mapMutations(['MARK_COMPLETE']),
-    ...mapActions(['getTodos', 'deleteTodo'])
+    // ...mapMutations(['MARK_COMPLETE']),
+    ...mapActions(['getTodos', 'deleteTodo', 'markComplete'])
   }
 } 
 </script>
@@ -88,7 +88,7 @@ export default {
     color: white;
   }
 
-  .todo-list li.completed {
+  .todo-list li.is_completed {
     background: rgb(119, 218, 243);
   }
 </style>

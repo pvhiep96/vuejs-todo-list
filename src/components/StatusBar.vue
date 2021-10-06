@@ -3,7 +3,7 @@
     <p>Done</p>
     <ul>
       <li v-for="todo in doneTodos" :key="todo.id">
-        {{ todo.title }}
+        {{ todo.content }}
       </li>
     </ul>
   </div>

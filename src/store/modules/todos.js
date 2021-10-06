@@ -6,9 +6,9 @@ const todosModule = {
   },
   getters: {
     todos: state => state.todos,
-    doneTodos: state => state.todos.filter(todo => todo.completed),
+    doneTodos: state => state.todos.filter(todo => todo.is_completed),
     // progress() {
-    //   return Math.round(this.$store.state.todos.filter(todo => todo.completed).length /
+    //   return Math.round(this.$store.state.todos.filter(todo => todo.is_completed).length /
     //     this.$store.state.todos.length * 100
     //   )
     // }
@@ -20,8 +20,7 @@ const todosModule = {
   actions: {
     async deleteTodo({commit}, todoId) {
       try {
-        await axios.delete(`https://jsonplaceholder.typicode.com/todos/${todoId}`)
-
+        await axios.delete(`http://localhost:3000/todos/${todoId}`)
         commit('DELETE_TODO', todoId)
       } catch (error) {
         console.log(error)
@@ -29,7 +28,7 @@ const todosModule = {
     },
     async addTodo({commit}, newTodo) {
       try {
-        await axios.post('https://jsonplaceholder.typicode.com/todos', newTodo)
+        await axios.post('http://localhost:3000/todos', newTodo)
         commit('ADD_TODO', newTodo)
       } catch (error) {
         console.log(error)
@@ -37,8 +36,17 @@ const todosModule = {
     },
     async getTodos({commit}) {
       try {
-        const response = await axios.get('https://jsonplaceholder.typicode.com/todos?_limit=5')
+        const response = await axios.get('http://localhost:3000/todos')
+        console.log(response.data)
         commit('SET_TODOS', response.data)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async markComplete({commit}, todoId) {
+      try {
+        await axios.put(`http://localhost:3000/mission_completed/${todoId}`)
+        commit('MARK_COMPLETE', todoId)
       } catch (error) {
         console.log(error)
       }
@@ -47,7 +55,7 @@ const todosModule = {
   mutations: {
     MARK_COMPLETE(state, todoId) {
       state.todos.map(todo => {
-        if (todo.id == todoId) todo.completed =!todo.completed
+        if (todo.id == todoId) todo.is_completed = !todo.is_completed
         return todo
       })
     },
