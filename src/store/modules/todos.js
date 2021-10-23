@@ -1,5 +1,17 @@
 import axios from 'axios'
 
+const API_URL = 'http://localhost:3000'
+
+const token = window.localStorage.getItem('token')
+
+const withAuth = axios.create({
+  baseURL: API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  }
+})
+
 const todosModule = {
   state: {
     todos: []
@@ -20,7 +32,7 @@ const todosModule = {
   actions: {
     async deleteTodo({commit}, todoId) {
       try {
-        await axios.delete(`http://localhost:3000/todos/${todoId}`)
+        await withAuth.delete(`/todos/${todoId}`)
         commit('DELETE_TODO', todoId)
       } catch (error) {
         console.log(error)
@@ -28,7 +40,7 @@ const todosModule = {
     },
     async addTodo({commit}, newTodo) {
       try {
-        await axios.post('http://localhost:3000/todos', newTodo)
+        await withAuth.post('/todos', newTodo)
         commit('ADD_TODO', newTodo)
       } catch (error) {
         console.log(error)
@@ -36,16 +48,15 @@ const todosModule = {
     },
     async getTodos({commit}) {
       try {
-        const response = await axios.get('http://localhost:3000/todos')
-        console.log(response.data)
-        commit('SET_TODOS', response.data)
+        const response = await withAuth.get('/todos')
+        commit('SET_TODOS', response.data.todos)
       } catch (error) {
         console.log(error)
       }
     },
     async markComplete({commit}, todoId) {
       try {
-        await axios.put(`http://localhost:3000/mission_completed/${todoId}`)
+        await withAuth.put(`/mission_completed/${todoId}`)
         commit('MARK_COMPLETE', todoId)
       } catch (error) {
         console.log(error)

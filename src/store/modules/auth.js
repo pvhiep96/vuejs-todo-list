@@ -1,6 +1,6 @@
 const state = {
   auth: {
-    isAuthenticated: false
+    isAuthenticated: window.localStorage.getItem('token') !== null
   }
 }
 
@@ -11,8 +11,9 @@ const getters = {
 const actions = {}
 
 const mutations = {
-  TOGGLE_AUTH(state) {
+  LOGOUT(state) {
     state.auth.isAuthenticated = !state.auth.isAuthenticated
+    window.localStorage.removeItem('token');
   },
 }
 

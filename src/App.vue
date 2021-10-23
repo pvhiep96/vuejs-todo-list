@@ -1,10 +1,12 @@
 <template>
-  <div id="app">
-    <Navbar/>
-    <Todos/>
-    <StatusBar/>
-    <ProgressBar/>
-  </div>
+  <v-app>
+    <div id="app">
+      <Navbar/>
+      <Todos/>
+      <StatusBar/>
+      <ProgressBar/>
+    </div>
+  </v-app>
 </template>
 
 <script>

@@ -8,7 +8,7 @@
         <button @click="deleteTodo(todo.id)">Delete</button>
       </li>
     </ul>
-    <p v-else style="text-align:center">Not authorised</p>
+    <FormLogin v-else />
   </div>
 </template>
 
@@ -16,9 +16,10 @@
 
 import {mapActions, mapGetters} from 'vuex'
 import TodoForm from './TodoForm.vue'
+import FormLogin from './FormLogin.vue'
 export default {
   name: 'Todos',
-  components: {TodoForm},
+  components: {TodoForm, FormLogin},
   // ############### Khong dung mapState #######################
   // computed: {
   //   todos() {
@@ -35,7 +36,9 @@ export default {
   //   todos: state => state.todos,
   //   isAuthenticated: state => state.auth.isAuthenticated
   // })
-  computed: {...mapGetters(['isAuthenticated', 'todos'])},
+  computed: {
+    ...mapGetters(['isAuthenticated', 'todos'])
+  },
   created() {
     this.getTodos()
   },
@@ -53,6 +56,9 @@ export default {
 </script>
 
 <style>
+  .todo-list {
+    padding-top: 20px; 
+  }
   .todo-list ul {
     padding: 0 10px 10px 10px;
     list-style-type: none;

@@ -2,16 +2,9 @@
   <div class="navbar">
     <h1>Vuex App Todos</h1>
     <ul>
-      <li>Home</li>
-      <li>About</li>
+      <li>Total Todo: {{todos.length}}</li>
       <li v-if='isAuthenticated'>
-        Total Todo: {{todos.length}}
-        <!-- <button @click="loginOrLogout">Logout</button> -->
-        <button @click="TOGGLE_AUTH">Logout</button>
-      </li>
-      <li v-else>
-        <!-- <button @click="loginOrLogout">Login</button> -->
-        <button @click="TOGGLE_AUTH">Login</button>
+        <v-btn @click="LOGOUT">Logout</v-btn>
       </li>
     </ul>
   </div>
@@ -32,10 +25,10 @@ export default {
   computed: {...mapGetters(['isAuthenticated', 'todos'])},
   // methods: {
   //   loginOrLogout() {
-  //     this.$store.commit('TOGGLE_AUTH')
+  //     this.$store.commit('LOGOUT')
   //   }
   // }
-  methods: mapMutations(['TOGGLE_AUTH'])
+  methods: mapMutations(['LOGOUT'])
 }
 </script>
 
